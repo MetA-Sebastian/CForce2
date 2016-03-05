@@ -7,6 +7,7 @@
 #include <string>
 #include <climits>
 #include <stdlib.h>
+#include <fstream>
 
 using namespace std;
 
@@ -18,7 +19,9 @@ int bufferLength{2000000},
         minLength{1},
         maxlength{5};
 
-void threading(int start) {
+void threading(int start, vector<string> charlist) {
+
+
     //array buffer
     vector<string> finalguess(bufferLength);
 
@@ -28,13 +31,18 @@ void threading(int start) {
     //vector<string> chars{"PW", "pw", "Pw", "pW", "LOCAL", "Local", "local", "brg", "BRG", "BRGG", "brgg", "2015", "2016", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "G", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "!", "\"", "$", "%", "&", "/", "(", ")", "=", "?", "*", "+", "~", "#", "'", "-", ".", ":", ",", ";", ">", "<", "|" };
 
     //all chars + words
-    vector<string> chars{"Bud", "PW", "pw", "Pw", "pW", "LOCAL", "Local", "local", "brg", "BRG", "BRGG", "brgg", "2015",
-                         "2016", "2017", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
+    vector<string> chars{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
                          "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I",
                          "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1",
                          "2", "3", "4", "5", "6", "7", "8", "9", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-",
                          "_", "+", "=", "~", "`", "[", "]", "{", "}", "|", "\\", ":", ";", "\"", "'", "<", ">", ",",
                          ".", "?", "/", " "};
+
+    for (unsigned long long k = 0; k < charlist.size(); ++k) {
+        chars.push_back(charlist[k]);
+    }
+
+
 
     int count{0};
     unsigned long long size{chars.size()};
@@ -93,6 +101,7 @@ void help() {
     cerr << "\t-b <value>\tNumber of values stored in each thread (Buffer)" << endl;
     cerr << "\t-max <value>\tMaximum password length to try" << endl;
     cerr << "\t-min <value>\tMinimum password length to try" << endl;
+    cerr << "\t-c <file>\tAdd words from file to use in bruteforce (like chars)" << endl;
     cerr << endl << "\t-d\tRun with default values:\n\t\t4 threads\n\t\t2000000 buffer size\n\t\t0-5 chars" << endl;
     cerr << endl << "Use another program to hash eg. jtr" << endl;
     cerr << endl << "Examples:" << endl;
@@ -103,6 +112,10 @@ void help() {
 
 int main(int argc, char *argv[]) {
 
+
+    vector<string> charlist{};
+    string line;
+    ifstream charfile;
 
     //commandline arguments
     //-- Menu --//
@@ -128,6 +141,10 @@ int main(int argc, char *argv[]) {
             i++;
             minLength = atoi(argv[i]);
         }
+        else if ((arg == "-c") || (arg == "-C")) {
+            i++;
+            charfile.open(argv[i]);
+        }
         else if ((arg == "-d") || (arg == "-D")) {
             threadcount = 4;
             bufferLength = 2000000;
@@ -137,97 +154,116 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    while (getline(charfile, line)) {
+        if (line != "") {
+            charlist.push_back(line);
+        }
+    }
+
+
 
     //how many threads?
-    std::thread t1(threading, 0);
+    std::thread t1(threading, 0, charlist);
     if (threadcount >= 2) {
-        std::thread t2(threading, 1);
+        std::thread t2(threading, 1, charlist);
         if (threadcount >= 3) {
-            std::thread t3(threading, 2);
+            std::thread t3(threading, 2, charlist);
             if (threadcount >= 4) {
-                std::thread t4(threading, 3);
+                std::thread t4(threading, 3, charlist);
                 if (threadcount >= 5) {
-                    std::thread t5(threading, 4);
+                    std::thread t5(threading, 4, charlist);
                     if (threadcount >= 6) {
-                        std::thread t6(threading, 5);
+                        std::thread t6(threading, 5, charlist);
                         if (threadcount >= 7) {
-                            std::thread t7(threading, 6);
+                            std::thread t7(threading, 6, charlist);
                             if (threadcount >= 8) {
-                                std::thread t8(threading, 7);
+                                std::thread t8(threading, 7, charlist);
                                 if (threadcount >= 9) {
-                                    std::thread t9(threading, 8);
+                                    std::thread t9(threading, 8, charlist);
                                     if (threadcount >= 10) {
-                                        std::thread t10(threading, 9);
+                                        std::thread t10(threading, 9, charlist);
                                         if (threadcount >= 11) {
-                                            std::thread t11(threading, 10);
+                                            std::thread t11(threading, 10, charlist);
                                             if (threadcount >= 12) {
-                                                std::thread t12(threading, 11);
+                                                std::thread t12(threading, 11, charlist);
                                                 if (threadcount >= 13) {
-                                                    std::thread t13(threading, 12);
+                                                    std::thread t13(threading, 12, charlist);
                                                     if (threadcount >= 14) {
-                                                        std::thread t14(threading, 13);
+                                                        std::thread t14(threading, 13, charlist);
                                                         if (threadcount >= 15) {
-                                                            std::thread t15(threading, 14);
+                                                            std::thread t15(threading, 14, charlist);
                                                             if (threadcount >= 16) {
-                                                                std::thread t16(threading, 15);
+                                                                std::thread t16(threading, 15, charlist);
                                                                 if (threadcount >= 17) {
-                                                                    std::thread t17(threading, 16);
+                                                                    std::thread t17(threading, 16, charlist);
                                                                     if (threadcount >= 18) {
-                                                                        std::thread t18(threading, 17);
+                                                                        std::thread t18(threading, 17, charlist);
                                                                         if (threadcount >= 19) {
-                                                                            std::thread t19(threading, 18);
+                                                                            std::thread t19(threading, 18, charlist);
                                                                             if (threadcount >= 20) {
-                                                                                std::thread t20(threading, 19);
+                                                                                std::thread t20(threading, 19,
+                                                                                                charlist);
                                                                                 if (threadcount >= 21) {
-                                                                                    std::thread t21(threading, 20);
+                                                                                    std::thread t21(threading, 20,
+                                                                                                    charlist);
                                                                                     if (threadcount >= 22) {
-                                                                                        std::thread t22(threading, 21);
+                                                                                        std::thread t22(threading, 21,
+                                                                                                        charlist);
                                                                                         if (threadcount >= 23) {
                                                                                             std::thread t23(threading,
-                                                                                                            22);
+                                                                                                            22,
+                                                                                                            charlist);
                                                                                             if (threadcount >= 24) {
                                                                                                 std::thread t24(
                                                                                                         threading,
-                                                                                                        23);
+                                                                                                        23, charlist);
                                                                                                 if (threadcount >= 25) {
                                                                                                     std::thread t25(
                                                                                                             threading,
-                                                                                                            24);
+                                                                                                            24,
+                                                                                                            charlist);
                                                                                                     if (threadcount >=
                                                                                                         26) {
                                                                                                         std::thread t26(
                                                                                                                 threading,
-                                                                                                                25);
+                                                                                                                25,
+                                                                                                                charlist);
                                                                                                         if (threadcount >=
                                                                                                             27) {
                                                                                                             std::thread t27(
                                                                                                                     threading,
-                                                                                                                    26);
+                                                                                                                    26,
+                                                                                                                    charlist);
                                                                                                             if (threadcount >=
                                                                                                                 28) {
                                                                                                                 std::thread t28(
                                                                                                                         threading,
-                                                                                                                        27);
+                                                                                                                        27,
+                                                                                                                        charlist);
                                                                                                                 if (threadcount >=
                                                                                                                     29) {
                                                                                                                     std::thread t29(
                                                                                                                             threading,
-                                                                                                                            28);
+                                                                                                                            28,
+                                                                                                                            charlist);
                                                                                                                     if (threadcount >=
                                                                                                                         30) {
                                                                                                                         std::thread t30(
                                                                                                                                 threading,
-                                                                                                                                29);
+                                                                                                                                29,
+                                                                                                                                charlist);
                                                                                                                         if (threadcount >=
                                                                                                                             31) {
                                                                                                                             std::thread t31(
                                                                                                                                     threading,
-                                                                                                                                    30);
+                                                                                                                                    30,
+                                                                                                                                    charlist);
                                                                                                                             if (threadcount >=
                                                                                                                                 32) {
                                                                                                                                 std::thread t32(
                                                                                                                                         threading,
-                                                                                                                                        31);
+                                                                                                                                        31,
+                                                                                                                                        charlist);
                                                                                                                                 t32.join();
                                                                                                                             }
                                                                                                                             t31.join();
@@ -294,3 +330,4 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
