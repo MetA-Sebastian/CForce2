@@ -6,12 +6,12 @@ Fast multithreaded bruteforce tool that can use words instead of chars!
 
 #### Usage
 
-##### Default
+###### Default
 <code>
 ./cforce -d 
 </code>
 
-##### Custom Charset
+###### Custom Charset
 
 On of the key features of cforce is its ability to bruteforce using words instead of just chars. 
 
