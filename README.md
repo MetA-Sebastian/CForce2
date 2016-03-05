@@ -29,4 +29,4 @@ aa2016
 aba     
 
 to use words you have to create a file with one word/line and use
-<code>./cforce -c /path/to/wordlist</code
+<code>./cforce -c /path/to/wordlist</code>
