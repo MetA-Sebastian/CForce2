@@ -18,16 +18,16 @@ On of the key features of cforce is its ability to bruteforce using words instea
 e.g.
 if you specified "2016" in your list cforce will bruteforce with all chars and 2016
 <code>
-a
-b
-2016
-aa
-ab
-a2016
-aaa
-aab
-aa2016
-aba
+a<br />
+b<br />
+2016<br />
+aa<br />
+ab<br />
+a2016<br />
+aaa<br />
+aab<br />
+aa2016<br />
+aba<br />
 </code>
 
 to use words you have to create a file with one word/line and use
