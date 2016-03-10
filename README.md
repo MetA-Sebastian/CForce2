@@ -1,4 +1,4 @@
-# CForce2
+# CForce
 Fast multithreaded bruteforce tool that can use words instead of chars!
 
 #### Compile CForce
