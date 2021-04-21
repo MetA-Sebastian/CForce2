@@ -94,7 +94,7 @@ void threading(int start, vector<string> charlist) {
 void help() {
     cerr << endl << "CForce v2.0" << endl;
     cerr << "Written by Sebastian Hirnschall" << endl;
-    cerr << "Contact - hirnschallsebi@aol.at" << endl;
+    cerr << "Contact - sebastian.hirnschall@gmail.com" << endl;
     cerr << endl << "Usage: ./cforce <options>" << endl;
     cerr << "Options:" << endl;
     cerr << "\t-t <value>\tNumber of threads to use" << endl;
