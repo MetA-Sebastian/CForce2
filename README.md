@@ -26,7 +26,7 @@ Fast multithreaded bruteforce tool that can use words instead of chars!
     Trys all 5-6 chars long passwords using 4 threads and a buffer size of 2000000 and pipes the output to John    
 
 
-###### Custom Charset
+###### How it works
 
 The key features of cforce is its ability to bruteforce using words instead of just chars.  
 E.g.:    
