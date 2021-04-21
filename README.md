@@ -1,6 +1,6 @@
 # CForce
 Designed to aid in targeted brute force password cracking attacks.       
-Use information that is known about a password to significantly (exponentially) speed up the time it takes to crack the password.
+Use information that is known about a password to significantly (exponentially) reduce the time it takes to crack the password.
 
 
 Fast multithreaded bruteforce tool that can use words instead of chars!
