@@ -28,8 +28,9 @@ Fast multithreaded bruteforce tool that can use words instead of chars!
 
 ###### Custom Charset
 
-The key features of cforce is its ability to bruteforce using words instead of just chars. 
-If you suspect the target to use the current year anywhere in the password you can add it to be used as a char. If the assumption is correct, the 4 char long year (e.g. 2016) will be used as a singe char, therfore reducing the password length by 3. Thus the password can be cracked significantly faster if some parts of the password are known.
+The key features of cforce is its ability to bruteforce using words instead of just chars.  
+E.g.:    
+If you suspect the target to use the current year anywhere in the password you can add it to be used as a char. If the assumption is correct, the 4 char long year (e.g. 2016) will be used as a single char, therefor reducing the password length by 3. Thus the password can be cracked significantly faster if some parts of the password are known even if the erxact position is unknown.
 
 e.g.
 if you specified "2016" in your list cforce will bruteforce with all chars and 2016   
